@@ -1,15 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider, connect } from 'react-redux';
+import { createStore } from 'redux';
 import './index.css';
 import App from './containers/App';
 import reportWebVitals from './reportWebVitals';
 import 'tachyons';
+import { searchRobots } from './containers/reducers';
 
+const store = createStore(searchRobots);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-      <App/>
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 

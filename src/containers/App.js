@@ -23,6 +23,7 @@ function App () {
         const filteredRobots = robots.filter(robot => {
             return robot.name.toLowerCase().includes(searchfield.toLowerCase());
         })
+        
         return !robots.length ? 
             <h1>Loading</h1> :
          (
