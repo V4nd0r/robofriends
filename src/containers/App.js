@@ -1,3 +1,4 @@
+//Imports
 import React, { Component } from "react";
 import {connect} from "react-redux";
 import {setSearchfield, requestRobots} from '../actions';
@@ -9,6 +10,7 @@ import ErrorBoundary from "../components/ErrorBoundary";
 
 import './App.css';
 
+// Define mapStateToProps function to map the redux state to the props of the component
 const mapStateToProps = (state) => {
     return{
         searchField: state.searchRobots.searchField,
@@ -18,6 +20,7 @@ const mapStateToProps = (state) => {
     }
 }
 
+// Define mapDispatchToProps function to map dispatching of actions to the props of the component
 const mapDispatchToProps = (dispatch) => {
     return  {
         onSearchChange: (event) => dispatch(setSearchfield(event.target.value)),
@@ -25,17 +28,22 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
+// Define App component
 class App extends Component {
+    // Call the onRequestRobots function after the component has mounted
     componentDidMount() {
         this.props.onRequestRobots();
     }
 
+    //Define render 
     render() {
         const {robots, searchField, onSearchChange, isPending } = this.props;
+        // Filter the robots array based on the searchField
         const filteredRobots = robots.filter(robot => {
             return robot.name.toLowerCase().includes(searchField.toLowerCase());
         })
         
+        // Render the component with the filtered robots
         return (
            <div className="tc">
                 <h1 className="f1">RoboFriends</h1>
@@ -52,4 +60,5 @@ class App extends Component {
     }
 }
 
+// Connect the App component to the Redux store using the mapStateToProps and mapDispatchToProps functions
 export default connect(mapStateToProps, mapDispatchToProps)(App);
